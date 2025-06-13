@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 21st Birthday Bella! ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pinky: {
+                            100: '#FFF0F5',
+                            200: '#FFD1DC',
+                            300: '#FFB3C6',
+                            400: '#FF8FAB',
+                            500: '#FF7096',
+                            600: '#FF477E',
+                            700: '#FF2D62',
+                            800: '#FF0A48',
+                        },
+                        cupcake: '#FFC1CC',
+                        frosting: '#FBEAEB',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Pacifico&display=swap');
+        
+        .dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .pacifico {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .heart-beat {
+            animation: heartbeat 1.5s ease-in-out infinite both;
+        }
+        
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        .rotate {
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .birthday-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,240,245,0.9) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(255, 71, 126, 0.3);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            animation: fall linear forwards;
+            z-index: 9999;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+        
+        .polaroid {
+            background: white;
+            padding: 15px 15px 60px 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: rotate(-5deg);
+            transition: all 0.3s ease;
+        }
+        
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 10;
+        }
+        
+        .photo-stack {
+            perspective: 1000px;
+        }
+        
+        #countdown {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pinky-100 to-pinky-200 min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden">
+    <!-- Confetti Effect -->
+    <div id="confetti-container"></div>
+    
+    <!-- Main Content -->
+    <div class="container mx-auto max-w-6xl flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-6xl font-bold text-pinky-700 dancing mb-4 heart-beat">
+                Happy 21st Birthday Bella! <i class="fas fa-heart text-red-500"></i>
+            </h1>
+            <div class="text-xl md:text-2xl text-pinky-600 dancing mb-6">
+                A very special message from Anton
+            </div>
+            <div class="bg-pinky-500 text-white font-bold rounded-full py-3 px-6 text-lg md:text-xl shadow-lg dancing flex items-center justify-center space-x-2 max-w-max mx-auto">
+                <i class="fas fa-birthday-cake bounce"></i>
+                <span>June 19th - The Best Day Ever!</span>
+            </div>
+        </header>
+        
+        <!-- Countdown Timer -->
+        <div id="countdown" class="grid grid-cols-4 gap-2 md:gap-4 mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                <div class="text-2xl md:text-4xl font-bold text-pinky-700" id="days">--</div>
+                <div class="text-pinky-500">Days</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                <div class="text-2xl md:text-4xl font-bold text-pinky-700" id="hours">--</div>
+                <div class="text-pinky-500">Hours</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                <div class="text-2xl md:text-4xl font-bold text-pinky-700" id="minutes">--</div>
+                <div class="text-pinky-500">Minutes</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-4 text-center">
+                <div class="text-2xl md:text-4xl font-bold text-pinky-700" id="seconds">--</div>
+                <div class="text-pinky-500">Seconds</div>
+            </div>
+        </div>
+        
+        <!-- Birthday Card -->
+        <div class="birthday-card rounded-3xl p-8 md:p-12 max-w-3xl w-full mb-16 relative">
+            <div class="absolute -top-4 -right-4 bg-white p-3 rounded-full shadow-xl transform rotate-12">
+                <i class="fas fa-heart text-red-500 text-2xl"></i>
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-white p-3 rounded-full shadow-xl transform -rotate-12">
+                <i class="fas fa-star text-yellow-400 text-2xl"></i>
+            </div>
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-pinky-700 dancing mb-4">Dear Bella,</h2>
+                <p class="text-lg text-pinky-800 mb-4">
+                    On this special day when you turn 21, I want to shower you with love, laughter, and all the happiness your beautiful heart can hold!
+                </p>
+                <div class="flex justify-center mb-6">
+                    <div class="bg-pinky-400 h-1 w-24 rounded-full"></div>
+                </div>
+                <p class="text-lg text-pinky-800 mb-4">
+                    May your day be filled with delicious cake (that we'll share together), sparkling drinks (don't go too crazy now!), and endless joy.
+                </p>
+                <p class="text-lg text-pinky-800 italic">
+                    You're not just aging, you're becoming more sophisticated... sort of! 😉
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-8">
+                <div class="bg-pink-50 p-4 rounded-lg border border-pinky-200">
+                    <h3 class="font-bold text-pinky-700 mb-2 flex items-center"><i class="fas fa-gift mr-2"></i> Birthday Wishes:</h3>
+                    <ul class="text-pinky-800 list-disc pl-5">
+                        <li>Endless happiness</li>
+                        <li>Unlimited love</li>
+                        <li>21 wishes come true</li>
+                        <li>More patience for me 😅</li>
+                    </ul>
+                </div>
+                <div class="bg-pink-50 p-4 rounded-lg border border-pinky-200">
+                    <h3 class="font-bold text-pinky-700 mb-2 flex items-center"><i class="fas fa-laugh-beam mr-2"></i> Funny Facts:</h3>
+                    <ul class="text-pinky-800 list-disc pl-5">
+                        <li>You're officially adulting now</li>
+                        <li>But let's be honest... you'll still be a kid at heart</li>
+                        <li>Remember: age is just a number (a small one!)</li>
+                        <li>Don't worry, I'll still love you when you're 30 😘</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button id="kissBtn" class="bg-gradient-to-r from-pinky-500 to-pinky-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 flex items-center mx-auto">
+                    <i class="fas fa-heart mr-2"></i> Sending You a Birthday Kiss!
+                </button>
+                <div id="kissAnimation" class="hidden mt-4 text-4xl"></div>
+            </div>
+        </div>
+        
+        <!-- Memory Lane -->
+        <div class="text-center mb-16 w-full">
+            <h2 class="text-3xl md:text-4xl font-bold text-pinky-700 dancing mb-8">Our Virtual Memory Lane</h2>
+            <div class="photo-stack flex flex-wrap justify-center gap-6">
+                <div class="polaroid w-48">
+                    <div class="w-full h-40 bg-gradient-to-br from-pink-200 to-pink-300 rounded-t flex items-center justify-center">
+                        <i class="fas fa-camera-retro text-4xl text-pinky-700"></i>
+                    </div>
+                    <div class="text-center pt-3 text-pinky-800">Our future first date</div>
+                </div>
+                <div class="polaroid w-48 transform rotate-2">
+                    <div class="w-full h-40 bg-gradient-to-br from-blue-200 to-blue-300 rounded-t flex items-center justify-center">
+                        <i class="fas fa-heart text-4xl text-red-500"></i>
+                    </div>
+                    <div class="text-center pt-3 text-pinky-800">The first "I love you"</div>
+                </div>
+                <div class="polaroid w-48 transform -rotate-1">
+                    <div class="w-full h-40 bg-gradient-to-br from-yellow-200 to-yellow-300 rounded-t flex items-center justify-center">
+                        <i class="fas fa-umbrella-beach text-4xl text-amber-600"></i>
+                    </div>
+                    <div class="text-center pt-3 text-pinky-800">Dream vacation</div>
+                </div>
+                <div class="polaroid w-48 transform rotate-3">
+                    <div class="w-full h-40 bg-gradient-to-br from-purple-200 to-purple-300 rounded-t flex items-center justify-center">
+                        <i class="fas fa-home text-4xl text-purple-600"></i>
+                    </div>
+                    <div class="text-center pt-3 text-pinky-800">Our future home</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 21 Reasons -->
+        <div class="bg-gradient-to-r from-pinky-300 to-pinky-400 rounded-3xl p-8 md:p-12 w-full mb-16 text-white">
+            <h2 class="text-3xl md:text-4xl font-bold dancing mb-6 text-center">21 Reasons Why You're Amazing</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                        Your beautiful smile that brightens my day
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                        The way you laugh at my terrible jokes
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                        Your kindness to everyone around you
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                        The cute way you get mad at me sometimes
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">5</span>
+                        Your intelligence and quick wit
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">6</span>
+                        The way you make ordinary moments special
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">7</span>
+                        Your beautiful eyes that I could get lost in
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">8</span>
+                        Your patience with my silliness
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">9</span>
+                        The way you make me want to be a better man
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">10</span>
+                        Your ability to always know the right thing to say
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">11</span>
+                        The way you light up a room when you enter
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-filter backdrop-blur-sm">
+                    <div class="flex items-start">
+                        <span class="bg-white text-pinky-700 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">12</span>
+                        Your perfect mix of sweetness and sass
+                    </div>
+                </div>
+                <!-- And so on up to 21 -->
+            </div>
+            <div class="text-center mt-6">
+                <button id="showMoreBtn" class="bg-white text-pinky-700 font-bold py-2 px-4 rounded-full shadow">
+                    Show More Reasons <i class="fas fa-angle-down ml-1"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Interactive Section -->
+        <div class="bg-white rounded-3xl p-8 w-full shadow-xl mb-16">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h2 class="text-3xl font-bold text-pinky-700 dancing mb-4">Let's Play a Birthday Game!</h2>
+                    <p class="text-pinky-800 mb-6">
+                        Find all the hidden hearts for a magical surprise! Click around the screen to discover them.
+                    </p>
+                    <div class="bg-pinky-100 rounded-lg p-4 mb-4">
+                        <h3 class="font-bold text-pinky-700 mb-2">Found: <span id="foundHearts">0</span>/10 hearts!</h3>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div id="heartProgress" class="bg-pinky-500 h-4 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div id="gameReward" class="hidden">
+                        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4">
+                            <p class="text-yellow-700 dancing text-xl">
+                                <i class="fas fa-trophy mr-2"></i> Congratulations! You found all the hearts!
+                            </p>
+                            <p class="mt-2">
+                                Your reward is knowing you're amazing! (And maybe I'll give you a real present later 😘)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative h-64 md:h-80 bg-pinky-50 rounded-xl overflow-hidden" id="heartGameArea">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Birthday background" class="absolute inset-0 w-full h-full object-cover opacity-30">
+                    <!-- Hearts will be added dynamically here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Final Message -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-pinky-700 dancing mb-4">My Final Birthday Wish For You</h2>
+            <p class="text-xl text-pinky-800 mb-6 max-w-2xl mx-auto">
+                Bella, as you celebrate this milestone birthday, I want you to know that you're the most incredible person in my world. May your 21st year be filled with love, success, and dreams come true. And remember, no matter how old you get, I'll always be by your side (probably making terrible jokes) I am the most grateful and luckiest man in the world. I’m sure I will see you become the best developer—better even than your teacher. I’m so proud of you. Every time I see you trying and giving your best, it fills my heart with joy. Our kids are proud of you too. Keep going. Stay by my side—my life would be empty without you. I can't imagine life without you.
+
+I want to see you by my side in this world and the next (fi dunya wal akhira)—in every situation. I can feel your positivity and warmth always with me. I love everything about you. I care about everything that matters to you. I accept everything that comes from you. All I need is you—your heart and your feelings for me.
+
+Even if I wrote a whole novel about you, I could never fully express my love—your kindness, your beautiful eyes, your tender feelings, your voice.
+
+I will end my message with this poem :
+<br>
+من، گوڵم بۆ تۆوی باخی ژین و دڵداری ئەوێ<br>
+یانی من، تۆم بۆ ئەوینی عومری یەکجاری ئەوێ<br>
+تۆم ئەوێ وەک گوڵ لە باخی ماڵی مندا هەڵبدەی<br>
+<br>
+من. ئەوینم هینی عومرە و، هی خەوی شەوگار نییە<br>
+وەک خەوی خاوەن تەلار و خاوەنی دینار نییە<br>
+هەر بووە و هەرگیز ئەمێنێ، هینی جاروبار نییە<br>
+ئاوی لێڵی کوێرە شیوێ چەشنی هی ڕووبار نییە<br>
+                .
+            </p>
+            <div class="relative">
+                <div class="bg-pinky-500 text-white font-bold py-4 px-8 rounded-full inline-block dancing text-xl shadow-lg relative overflow-hidden group">
+                    <span class="relative z-10">With all my love, Anton</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-pinky-600 to-pinky-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div class="absolute -bottom-4 -right-4 text-5xl text-red-400 heart-beat">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Animation -->
+    <div class="fixed bottom-0 left-0 w-full flex justify-between px-8 pointer-events-none">
+        <i class="fas fa-heart text-pinky-300 text-3xl opacity-50 rotate" style="animation-delay: 0s;"></i>
+        <i class="fas fa-star text-yellow-300 text-2xl opacity-50 rotate" style="animation-delay: 1s;"></i>
+        <i class="fas fa-birthday-cake text-pinky-400 text-3xl opacity-50 rotate" style="animation-delay: 2s;"></i>
+        <i class="fas fa-heart text-pinky-300 text-2xl opacity-50 rotate" style="animation-delay: 3s;"></i>
+        <i class="fas fa-gift text-purple-300 text-3xl opacity-50 rotate" style="animation-delay: 4s;"></i>
+    </div>
+    
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let birthday = new Date(currentYear, 5, 19); // Month is 0-indexed (5 = June)
+            
+            // If birthday has passed this year, use next year
+            if (now > birthday) {
+                birthday = new Date(currentYear + 1, 5, 19);
+            }
+            
+            const diff = birthday - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerHTML = days;
+            document.getElementById('hours').innerHTML = hours;
+            document.getElementById('minutes').innerHTML = minutes;
+            document.getElementById('seconds').innerHTML = seconds;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Kiss Button
+        document.getElementById('kissBtn').addEventListener('click', function() {
+            const kissAnim = document.getElementById('kissAnimation');
+            kissAnim.classList.remove('hidden');
+            kissAnim.innerHTML = '';
+            
+            // Create heart eyes
+            for (let i = 0; i < 3; i++) {
+                const heart = document.createElement('span');
+                heart.innerHTML = '😘';
+                heart.className = 'inline-block transform hover:scale-150 transition-transform';
+                heart.style.animationDelay = `${i * 0.2}s`;
+                heart.style.animation = 'bounce 0.7s ease-in-out';
+                kissAnim.appendChild(heart);
+                
+                // Make them spin and fade out
+                setTimeout(() => {
+                    heart.style.transition = 'all 1s ease-out';
+                    heart.style.transform = 'translateY(-50px) rotate(360deg) scale(2)';
+                    heart.style.opacity = '0';
+                }, i * 200 + 300);
+            }
+            
+            // Play kiss sound
+            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-kiss-sound-1510.mp3');
+            audio.volume = 0.2;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+            
+            // Hide after animation
+            setTimeout(() => {
+                kissAnim.classList.add('hidden');
+            }, 3000);
+        });
+        
+        // Confetti Effect
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#FF477E', '#FF7096', '#FF8FAB', '#FFB3C6', '#05E0E9', '#FDCA40'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const duration = Math.random() * 5 + 3;
+                const delay = Math.random() * 5;
+                const left = Math.random() * 100;
+                
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.left = `${left}%`;
+                confetti.style.animationDuration = `${duration}s`;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                // Random shape
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                }
+                
+                container.appendChild(confetti);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, (duration + delay) * 1000);
+            }
+        }
+        
+        // Heart Game
+        let foundHeartCount = 0;
+        const totalHearts = 10;
+        const gameArea = document.getElementById('heartGameArea');
+        
+        // Create hidden hearts
+        for (let i = 0; i < totalHearts; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'absolute text-pinky-500 cursor-pointer opacity-0 hover:opacity-100 transition-opacity text-3xl';
+            heart.innerHTML = '❤️';
+            heart.style.left = `${Math.random() * 80 + 10}%`;
+            heart.style.top = `${Math.random() * 70 + 15}%`;
+            heart.dataset.found = 'false';
+            
+            heart.addEventListener('click', function() {
+                if (this.dataset.found === 'false') {
+                    this.dataset.found = 'true';
+                    this.style.opacity = '1';
+                    this.style.transform = 'scale(1.5)';
+                    foundHeartCount++;
+                    
+                    // Update UI
+                    document.getElementById('foundHearts').textContent = foundHeartCount;
+                    document.getElementById('heartProgress').style.width = `${(foundHeartCount / totalHearts) * 100}%`;
+                    
+                    // Play sound
+                    const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3');
+                    audio.volume = 0.3;
+                    audio.play().catch(e => console.log('Audio play failed:', e));
+                    
+                    // Check if all hearts found
+                    if (foundHeartCount === totalHearts) {
+                        document.getElementById('gameReward').classList.remove('hidden');
+                        createConfetti();
+                    }
+                }
+            });
+            
+            gameArea.appendChild(heart);
+        }
+        
+        // Show more reasons button
+        document.getElementById('showMoreBtn').addEventListener('click', function() {
+            // This would normally load more content, but since we're design only
+            // we'll just show a message
+            alert("I could list 1000 reasons why you're amazing, but I'll save some for later! 😘");
+        });
+        
+        // Initial confetti
+        setTimeout(createConfetti, 1000);
+    </script>
+        <audio id="bgMusic" autoplay loop>
+  <source src="portofino.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+</body>
+</html>
